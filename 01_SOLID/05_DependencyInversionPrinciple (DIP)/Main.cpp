@@ -1,6 +1,8 @@
 #include <iostream>
 #include <memory>
 
+using namespace std;
+
 // Interface provided for classes to implement different recommendation strategies
 class RecommendationStrategy {
 public:
@@ -12,7 +14,7 @@ public:
 class RecentlyAdded : public RecommendationStrategy {
 public:
     void getRecommendations() override {
-        std::cout << "Showing recently added content..." << std::endl;
+        cout << "Showing recently added content..." << endl;
     }
 };
 
@@ -20,7 +22,7 @@ public:
 class TrendingNow : public RecommendationStrategy {
 public:
     void getRecommendations() override {
-        std::cout << "Showing trending content..." << std::endl;
+        cout << "Showing trending content..." << endl;
     }
 };
 
@@ -28,17 +30,17 @@ public:
 class GenreBased : public RecommendationStrategy {
 public:
     void getRecommendations() override {
-        std::cout << "Showing content based on your favorite genres..." << std::endl;
+        cout << "Showing content based on your favorite genres..." << endl;
     }
 };
 
 // Class implementing the Recommendation Engine (High-level module)
 class RecommendationEngine {
 private:
-    std::shared_ptr<RecommendationStrategy> strategy;
+    shared_ptr<RecommendationStrategy> strategy;
 
 public:
-    RecommendationEngine(std::shared_ptr<RecommendationStrategy> strat) 
+    RecommendationEngine(shared_ptr<RecommendationStrategy> strat) 
         : strategy(strat) {}
 
     void recommend() {
@@ -47,12 +49,12 @@ public:
 };
 
 int main() {
-    auto strategy = std::make_shared<TrendingNow>(); // could also be RecentlyAdded or GenreBased
+    auto strategy = make_shared<TrendingNow>(); // could also be RecentlyAdded or GenreBased
     RecommendationEngine engine(strategy);
     engine.recommend();
     
     // Can easily switch strategies
-    engine = RecommendationEngine(std::make_shared<RecentlyAdded>());
+    engine = RecommendationEngine(make_shared<RecentlyAdded>());
     engine.recommend();
     
     return 0;

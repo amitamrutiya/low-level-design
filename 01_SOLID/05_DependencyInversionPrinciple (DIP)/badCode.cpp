@@ -1,25 +1,27 @@
 #include <iostream>
 #include <memory>
 
+using namespace std;
+
 // Class implementing the recommendations based on recently added
 class RecentlyAdded {
 public:
     void getRecommendations() {
-        std::cout << "Showing recently added content..." << std::endl;
+        cout << "Showing recently added content..." << endl;
     }
 };
 
 class TrendingNow {
 public:
     void getTrendingRecommendations() {
-        std::cout << "Showing trending content..." << std::endl;
+        cout << "Showing trending content..." << endl;
     }
 };
 
 class GenreBased {
 public:
     void getGenreRecommendations() {
-        std::cout << "Showing content based on your favorite genres..." << std::endl;
+        cout << "Showing content based on your favorite genres..." << endl;
     }
 };
 
