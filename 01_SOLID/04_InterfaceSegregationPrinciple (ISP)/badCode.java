@@ -23,7 +23,7 @@ class Human implements Worker {
     }
 }
 
-class Robot implements Worker {
+class badCode implements Worker {
     public void work() {
         System.out.println("Robot is working");
     }

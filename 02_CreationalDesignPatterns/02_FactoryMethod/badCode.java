@@ -55,7 +55,7 @@ class LogisticService {
     }
 }
 
-public class BadCode {
+public class badCode {
     public static void main(String[] args) {
         LogisticService service = new LogisticService();
         service.deliver("Truck"); // Delivering by Truck
