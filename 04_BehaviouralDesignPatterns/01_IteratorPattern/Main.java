@@ -13,21 +13,20 @@ class Video {
     }
 }
 
-class YoutTubePlaylist {
-    private List<Video> videos = new ArrayList<>();
+// class YoutTubePlaylist {
+//     private List<Video> videos = new ArrayList<>();
 
-    public void addVideo(Video video) {
-        videos.add(video);
-    }
+//     public void addVideo(Video video) {
+//         videos.add(video);
+//     }
 
-    public List<Video> getVideos() {
-        return videos;
-    }
-}
+//     public List<Video> getVideos() {
+//         return videos;
+//     }
+// }
 
 interface PlaylistIterator {
     boolean hasNext();
-
     Video next();
 }
 
@@ -54,6 +53,31 @@ class YoutTubePlaylistIterator implements PlaylistIterator {
     }
 }
 
+// Iterable interface
+interface Playlist {
+    PlaylistIterator createIterator();
+    PlaylistIterator createCopyrightIterator();
+}
+
+class YoutTubePlaylist implements Playlist {
+    private List<Video> videos = new ArrayList<>();
+
+    public void addVideo(Video video) {
+        videos.add(video);
+    }
+
+    @Override
+    public PlaylistIterator createIterator() {
+        return new YoutTubePlaylistIterator(videos);
+    }
+
+    @Override
+    public PlaylistIterator createCopyrightIterator() {
+        // This method can be implemented to return a different iterator if needed
+        return new YoutTubePlaylistIterator(videos);
+    }
+}
+
 public class Main {
     public static void main(String[] args) {
         YoutTubePlaylist playlist = new YoutTubePlaylist();
@@ -63,8 +87,8 @@ public class Main {
         playlist.addVideo(new Video("Video 4"));
         playlist.addVideo(new Video("Video 5"));
 
-        PlaylistIterator iterator = new YoutTubePlaylistIterator(playlist.getVideos());
-        
+        PlaylistIterator iterator = playlist.createIterator();
+
         while (iterator.hasNext()) {
             Video video = iterator.next();
             System.out.println(video.getTitle());
